@@ -28,6 +28,7 @@ poetry run python cli/run.py
 
 ```sh
 > Question: Do you know famous indonesian athletes?
+
 > Answer: """
 Famous Indonesian Athletes
 --------------------------
@@ -60,4 +61,4 @@ Error code: 429 - {'error': {'message': 'You exceeded your current quota, please
 
 So, I decided to not using OpenAI, and migrate to FireWorksAI (or any similar goals) instead.
 
-_Payment required?_: https://community.openai.com/t/probable-openai-bug-insufficient-quota-error-on-paid-account-with-available-balance/331067/14
+> _Payment required?_: https://community.openai.com/t/probable-openai-bug-insufficient-quota-error-on-paid-account-with-available-balance/331067/14 :)
