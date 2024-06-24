@@ -4,6 +4,10 @@ from extractor.markdown_extractor import MarkdownExtractor
 
 class ExtractorProcessor:
   @classmethod
-  def extract(cls, file_path: str) -> list[Document]:
+  def extract(cls, file_path: str, return_text: bool = False) -> list[Document]:
+    delimiter = '\n'
+    
     extractor = MarkdownExtractor(file_path)
-    return extractor.extract()
+    return delimiter.join([
+        document.page_content for document in extractor.extract()]
+    ) if return_text else extractor.extract()
