@@ -13,7 +13,7 @@ def run_workflow(query: str):
 
     # Embed to the DB
     embeddings = Embedding()
-    vector_store = embeddings.embed_documents(markdown_documents)
+    vector_store = embeddings.embed_documents(markdown_documents, embed=False)
 
     # Find similarity
     matched_docs = vector_store.similarity_search(query)

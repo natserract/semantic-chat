@@ -8,6 +8,9 @@ The purpose of this guide is to demonstrate how to store OpenAI embeddings in Su
 # Set environment
 poetry shell
 
+# Install spacy model
+python -m spacy download en_core_web_sm
+
 # Install packages
 poetry install
 
