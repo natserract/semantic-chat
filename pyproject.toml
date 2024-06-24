@@ -4,10 +4,12 @@ version = "0.1.0"
 description = ""
 authors = ["Alfin Surya <benjaminstwo@gmail.com>"]
 readme = "README.md"
-packages = [{include = "ai_supabase"}]
 
 [tool.poetry.dependencies]
 python = "^3.12"
+python-dotenv = "^1.0.1"
+langchain = "^0.2.5"
+supabase = "^2.5.1"
 
 
 [build-system]

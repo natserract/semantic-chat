@@ -12,3 +12,5 @@ class Config:
     DB_PASSWORD = os.environ.get('DB_PASSWORD')
     DB_NAME = os.environ.get('DB_NAME')
     SUPABASE_URL = os.environ.get('SUPABASE_URL')
+    SUPABASE_DB_URI = os.environ.get('SUPABASE_DB_URI')
+    SUPABASE_API_KEY = os.environ.get('SUPABASE_API_KEY')
