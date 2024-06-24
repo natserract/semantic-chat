@@ -3,6 +3,8 @@ from helpers.file import get_base_path
 from embedding import Embedding
 from langchain_fireworks import ChatFireworks
 from config import Config
+from langchain_core.prompts import ChatPromptTemplate
+from langchain.chains import RetrievalQA
 
 def run_workflow(query: str):
     # Find, extract dataset first
@@ -16,28 +18,36 @@ def run_workflow(query: str):
 
     # Find similarity
     matched_docs = vector_store.similarity_search_with_relevance_scores(query)
-    doc, _ = matched_docs[0]
+    delimiter = '\n'
+    context = delimiter.join([
+        document.page_content for document, _ in matched_docs]
+    )
 
     # Prepare the response
-    messages = [
-        {
-            "role": "system",
-            "content":"You are a NatserractAI, friendly and helpful AI assistant by Natserract that provides help with documents.",
-        },
-        {
-            "role": "user",
-            "content": query,
-        },
-        {
-            "role": "assistant",
-            "content": doc.page_content,
-        },
-    ]
-    chat = ChatFireworks(
+    llm = ChatFireworks(
         model="accounts/fireworks/models/mixtral-8x7b-instruct",
-        api_key=Config.FIREWORKS_API_KEY
+        api_key=Config.FIREWORKS_API_KEY,
+        temperature=0.7
     )
-    chat.invoke(messages).pretty_print()
+
+    template = """Use the given context to answer the question.
+    If you don't know the answer, say you don't know.
+    Use three sentence maximum and keep the answer concise.
+    Context: {context}
+    Question: {question}
+    """
+    prompt = ChatPromptTemplate.from_template(template)
+    qa_chain = RetrievalQA.from_chain_type(
+        llm=llm, 
+        retriever=vector_store.as_retriever(),
+        chain_type_kwargs={"prompt": prompt}
+    )
+    response = qa_chain.invoke(
+        context=context,
+        question=query,
+        input=query
+    )
+    print('\n Answer: ', response['result'])
 
 if __name__ == "__main__":
     query = input('\n Question: ')

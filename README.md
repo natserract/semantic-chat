@@ -27,27 +27,18 @@ poetry run python cli/run.py
 ## Example Questions
 
 ```sh
-> Question: Do you know famous indonesian athletes?
+# Related Question
+> Question: Demographics condition in Indonesia?
 
 > Answer: """
-Famous Indonesian Athletes
---------------------------
+I don't have real-time data, but as of the last available statistics, Indonesia is the fourth-most populous country in the world with a population of over 260 million people. The largest ethnic group is Javanese, but there is a significant diversity of cultures, languages, and religions across the archipelago. The official religion is Islam, followed by Protestantism, Catholicism, Hinduism, and Buddhism. The population is relatively young, with a median age of around 30 years old.
+"""
 
-### 1. **Lily Sri Martha**
+# Unrelated Question
+> Question: Who is Nelson Mandela?
 
-*   **Sport**: Weightlifting
-*   **Achievements**: Gold medalist in the 1988 Seoul Olympics, setting a world record in the 44 kg weight class.
-
-### 2. **Rudy Hartono**
-
-*   **Sport**: Badminton
-*   **Achievements**: Eight-time All England Open champion (1968-1974, 1976) and gold medalist in the 1972 Munich Olympics.
-
-### 3. **Susi Susanti**
-
-*   **Sport**: Badminton
-*   **Achievements**: Gold medalist in the 1992 Barcelona Olympics and a four-time SEA Games gold medalist.
-...
+> Answer: """
+I'm sorry for any confusion, but the context provided does not include any information about Nelson Mandela. He is a significant historical figure from South Africa, known for his fight against apartheid and his role as the first black president of South Africa.
 """
 ```
 
