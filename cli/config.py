@@ -5,6 +5,7 @@ load_dotenv()
 
 class Config:
     OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
+    FIREWORKS_API_KEY = os.environ.get('FIREWORKS_API_KEY')
     OPENAI_MODEL = os.environ.get('OPENAI_MODEL')
     DB_NAME = os.environ.get('DB_NAME')
     DB_PORT = os.environ.get('DB_PORT')

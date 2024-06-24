@@ -1,7 +1,7 @@
-from langchain.vectorstores import SupabaseVectorStore
+from langchain_community.vectorstores import SupabaseVectorStore
 from langchain_core.documents import Document
 from extensions.storage.supabase_storage import SupabaseStorage
-from langchain.embeddings import SpacyEmbeddings
+from langchain_community.embeddings import SpacyEmbeddings
 
 embedder = SpacyEmbeddings(model_name="en_core_web_sm")
 

@@ -1,8 +1,7 @@
 from extractor.extractor_processor import ExtractorProcessor
 from helpers.file import get_base_path
 from embedding import Embedding
-from langchain.schema import SystemMessage, HumanMessage
-from langchain_openai import ChatOpenAI
+from langchain_fireworks import ChatFireworks
 from config import Config
 
 def run_workflow(query: str):
@@ -16,8 +15,8 @@ def run_workflow(query: str):
     vector_store = embeddings.embed_documents(markdown_documents, embed=False)
 
     # Find similarity
-    matched_docs = vector_store.similarity_search(query)
-    injected_docs = "\n\n".join([doc.page_content for doc in matched_docs])
+    matched_docs = vector_store.similarity_search_with_relevance_scores(query)
+    doc, _ = matched_docs[0]
 
     # Prepare the response
     messages = [
@@ -31,12 +30,15 @@ def run_workflow(query: str):
         },
         {
             "role": "assistant",
-            "content": injected_docs,
+            "content": doc.page_content,
         },
     ]
-    llm = ChatOpenAI(model=Config.OPENAI_MODEL, api_key=Config.OPENAI_API_KEY)
-    print('AI Response: ', llm.invoke(messages))
+    chat = ChatFireworks(
+        model="accounts/fireworks/models/mixtral-8x7b-instruct",
+        api_key=Config.FIREWORKS_API_KEY
+    )
+    chat.invoke(messages).pretty_print()
 
 if __name__ == "__main__":
-    query = "Geography in Indonesia?"
+    query = input('\n Question: ')
     run_workflow(query)
